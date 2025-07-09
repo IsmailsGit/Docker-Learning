@@ -1,0 +1,65 @@
+# Introduction to Containers and Docker 
+## What are Containers?
+Containers are lightweight, portable units for running applications.
+<br> They bundle an application with all its dependencies ensuring it runs consistently across different environments.
+<br> For example, if you have an application and you want to run every part of the application, containers will include the code, the runtime, the libraries and anything you need including all dependencies that the application needs in order to run 
+and because they're isolated it runs the same on any environment you want to run it on. 
+
+Think of containers like shipping containers just like how shipping containers hold everything needed for goods to be transported and can be easily moved from ships and trains, Software containers hold everything needed for an application to run and can be easily moved from one environment to another.
+
+![Screenshot](https://github.com/user-attachments/assets/68273fd3-18a2-48e3-a247-1aa3a8ccdd89)
+
+The infrastructure(your laptop or host machine) represents the physical or virtual hardware where everything runs.
+<br> The host operating system is the operating system that runs directly on the infrastructure e.g. MacOS or Windows.
+<br> The docker engine is what makes containerization possible, it provides the environment to build, run and manage containers. Without the docker engine your containers would be useless and won't run.
+<br> On top of the docker engine there is the docker containers, each container holds an application and all its dependencies so the binaries and libraries that the application requires to run. This isolation ensures that each app runs consistently regardless of the environment and each container doesn't interfere with each other. 
+
+### Benefits of Containers
+Isolation - Isolation helps prevent conflict and ensures that applications run smoothly without interfering with each other.
+<br> Consistency - Containers provide a consistent environment for applications to run, this means that the application behaves the same way regardless of where it's deployed, eliminates anyone from having any problems like this machine only works on windows and not mac os, due to missing dependencies or different configurations.
+<br> Efficiency - Containers are more resource efficient compared to traditional virtual machines, they share the host kernel(host operating system), the docker engine sits above the host os which means the containers share the host system's kernal(operating system). This allows for more containers to run on the same hardware and makes containers faster to start up compared to virtual machines.
+
+## What is Docker?
+Docker is an open platform for developing, shipping and running applications in containers.
+<br> It simplifies the process of managing containers, making it easier to build, deploy and run applications.
+<br> Docker has several key components that make it such a powerful tool:
+Docker Engine - Docker Engine is the core component of Docker that enables building, running, and managing containers. It uses Dockerfiles to build container images, and those images are then used to create and run containers. Think of it like the engine of a car—it powers the entire container lifecycle.
+<br> Docker Hub - A cloud service for sharing applications and automating workflows. It is basically a repository where you can find and share container images, its like the app store for docker images, you can pull official images, community contributed images or even share your own images with others.
+<br>
+Docker Compose - It is essentially a tool for defining and running multi container docker applications(Will go in detail later on).
+Images - Images are templates for creating containers, you can think of an image as a snapshot of an application at a certain point in time.
+<br> Images are immutable, which means that they don't change once they're created and the only way to change them is by recreating the image.
+<br> The immutability ensures that the application runs consistently no matter where it's deployed.
+<br> Containers on the other hand are the running instances of images, for example if an image is a recipe a container is the dish you create from it. Containers are what you actually interact with, they run your application and you can start, stop and modify them as needed. 
+<br> Docker file - A docker file is a file used to build docker images, it contains a series of instructions that docker uses to assemble an image 
+### Importance in Modern Development 
+1. Simplified Deployment - One of the biggest challenges in software development is ensuring that applications work consistently across different environments. Docker solves this problem by creating a consistent environment from development all the way to production.
+2. Improved Efficiency - Traditional virtual machines can be resource heavy and slow to start, in contrast docker containers are lightweight and share the host systems kernel which allows them to start up almost instantly and use fewer resources. This efficiency is crucial in modern development where developers can spin up containers in seconds which make easier to test and deploy applications rapidly.
+3. Enhanced Collaboration - Docker makes it easy to share development environments and applications with team members, instead of setting up complex environments on each developers machine you can create a docker image and share it with your team.
+4. Streamlines workflows by integrating seamlessly with CI CD pipelines, this allows for automated testing, building and deployment of containers.
+
+![Screenshot](https://github.com/user-attachments/assets/fd0f3a03-24db-4640-bee7-14a4790697bf)
+<br>A virtual machine allows multiple operating systems to run on a single physical machine.
+The infrastructure(your laptop or host machine) represents the physical or virtual hardware where everything runs.
+<br> The host operating system is the operating system that runs directly on the infrastructure e.g. MacOS or Windows.
+<br> The hypervisor is responsible for creating and managing virtual machines by allocating resources like cpu, memory and storage. Each vm runs a full guest operating system which is completely isolated from others.
+<br> Within each vm you have the guest operating system which is another different operating system running on top of the host. Each vm has its own binaries, libraries and anything an application would need to run.
+
+### VMs(Virtual Machines) vs Containers
+<br>Key differences between the two 
+<br>
+Each vm needs to boot up a full guest ❌ |Startup Time| ✅ Containers share the host     system which operating can take minutes            |            operating system so they can start                                                                              within seconds.  
+<br>Each vm includes a full operating  ❌|Resource Usage|✅ Containers are more efficient 
+operating which consumes significant resources.    |       using only what's necessary for the                                                              application and its dependencies
+<br>Vm's provide a strong isolation   ✅ |Isolation| ❌  Containers offer process level 
+with each vm  having its own operating system    |   isolation, they share the host os                                                                kernel but they're isolated within the                                                           container itself, the process is                                                                  running within the container
+<br> Vm's are less portable due to their❌|Portability|✅Containers are highly portable and can 
+size and dependency on specific hypervisors      |    run consistently across different                                                               environments thanks to dockers image format
+### Introduction to Docker File and Docker Images
+docker --version - Shows you the version of docker
+<br> docker info - Gives a comprehensive overview of your docker environment, useful if you want to troublshoot or understand the system's current state. 
+<br> docker ps - Shows you all the running containers, when it was created, the status etc.
+<br> docker ps -a - This lists all containers including the stopped ones. 
+
+
+
