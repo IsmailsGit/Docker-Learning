@@ -55,11 +55,38 @@ operating which consumes significant resources.    |       using only what's nec
 with each vm  having its own operating system    |   isolation, they share the host os                                                                kernel but they're isolated within the                                                           container itself, the process is                                                                  running within the container
 <br> Vm's are less portable due to their❌|Portability|✅Containers are highly portable and can 
 size and dependency on specific hypervisors      |    run consistently across different                                                               environments thanks to dockers image format
-### Introduction to Docker File and Docker Images
+## Introduction to Docker File and Docker Images
 docker --version - Shows you the version of docker
 <br> docker info - Gives a comprehensive overview of your docker environment, useful if you want to troublshoot or understand the system's current state. 
 <br> docker ps - Shows you all the running containers, when it was created, the status etc.
 <br> docker ps -a - This lists all containers including the stopped ones. 
+
+Understanding Dockerfile
+A docker file is just a series of instructions on how to build the docker image.
+<br> Each instruction in a docker file creates a layer in the image, which makes it easier to track changes and optimize your builds. 
+
+5 Key Commands
+<br> FROM - Specifies the base image to use for the docker image, the base image serves as the foundation for your application.
+<br> RUN - Executes commands in the container, this instruction is used to install packages and update dependencies.
+<br> COPY - Copies files from the host machine into the container, this is how you bring your applications code and configuration into the container. 
+<br> WORKDIR - Sets the working directory for subsequent instructions, this ensures that the command runs in the correct directory within the container 
+<br> CMD - Specifies the command to run when the container starts, when the container starts it'll run this command
+<br> Example Dockerfile
+<br> #The from instruction sets the base image for your docker image in this case we're using the official Node.js image.
+<br> FROM node:14
+<br> #The workdir instruction sets the working directory inside the container, this is where instructions like copy and run will be executed
+<br> WORKDIR /app
+<br> #This is copying files from your host machine to the container, we're copying the package.json and the package-lock.json files to install dependencies  
+<br> COPY package*.json ./
+<br> The run instruction executes commands in the container, we're using it to run npm install to install the node js dependencies
+<br> RUN npm install
+<br> #Copies the rest of the application code 
+<br> COPY ..
+<br> #The expose instruction tells docker that the container will listen on the specified network ports at runtime which in this case is 3000, this is useful for when you want to run the container and expose ports to the host machine 
+<br> #This specifies the command to run when the container starts, here we are starting a node js application by running node index.js 
+<br> CMD ["node", "index.js"]
+
+
 
 
 
