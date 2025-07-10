@@ -60,6 +60,7 @@ docker --version - Shows you the version of docker
 <br> docker info - Gives a comprehensive overview of your docker environment, useful if you want to troublshoot or understand the system's current state. 
 <br> docker ps - Shows you all the running containers, when it was created, the status etc.
 <br> docker ps -a - This lists all containers including the stopped ones. 
+<br> docker build -t imagename . - This builds a docker image the docker build part of the command initiates the build process, the -t tags the image with a name in this case imagename, the . represents the current directory and tells docker to look for the docker file there, if we were in a different directory we would do ./ and then the name of the directory your docker file is in
 
 Understanding Dockerfile
 A docker file is just a series of instructions on how to build the docker image.
