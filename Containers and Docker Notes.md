@@ -60,7 +60,8 @@ docker --version - Shows you the version of docker
 <br> docker info - Gives a comprehensive overview of your docker environment, useful if you want to troublshoot or understand the system's current state. 
 <br> docker ps - Shows you all the running containers, when it was created, the status etc.
 <br> docker ps -a - This lists all containers including the stopped ones. 
-<br> docker build -t imagename . - This builds a docker image the docker build part of the command initiates the build process, the -t tags the image with a name in this case imagename, the . represents the current directory and tells docker to look for the docker file there, if we were in a different directory we would do ./ and then the name of the directory your docker file is in
+<br> docker build -t imagename . - This builds a docker image the docker build part of the command initiates the build process, the -t tags the image with a name in this case imagename, the . represents the current directory and tells docker to look for the docker file there, if we were in a different directory we would do ./ and then the name of the directory your docker file is in.
+<br> docker run -d -p 5002:5002 nameofthecontainerwe'reusing - the -d runs the container in detached mode which means running it in the background and the -p followed by the ports is mapping the port 5002 on my machine to the port 5002 in the container and then the name of the image we're using
 
 Understanding Dockerfile
 A docker file is just a series of instructions on how to build the docker image.
@@ -72,6 +73,7 @@ A docker file is just a series of instructions on how to build the docker image.
 <br> COPY - Copies files from the host machine into the container, this is how you bring your applications code and configuration into the container. 
 <br> WORKDIR - Sets the working directory for subsequent instructions, this ensures that the command runs in the correct directory within the container 
 <br> CMD - Specifies the command to run when the container starts, when the container starts it'll run this command
+
 <br> Example Dockerfile
 <br> #The from instruction sets the base image for your docker image in this case we're using the official Node.js image.
 <br> FROM node:14
@@ -86,6 +88,7 @@ A docker file is just a series of instructions on how to build the docker image.
 <br> #The expose instruction tells docker that the container will listen on the specified network ports at runtime which in this case is 3000, this is useful for when you want to run the container and expose ports to the host machine 
 <br> #This specifies the command to run when the container starts, here we are starting a node js application by running node index.js 
 <br> CMD ["node", "index.js"]
+
 
 
 
