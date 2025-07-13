@@ -96,21 +96,21 @@ A docker file is just a series of instructions on how to build the docker image.
 
 ### Create a Simple Web Application to Dockerise.
 Python will be used in this but you don't need to really know what it does, also be using flask flask is a simple and lightweight framework for creating web applications in python.
-Make a directory mkdir hello_flask
-Make a python file touch app.py
-from flask import Flask #We start by importing flask, we are basically creating a new flask application instance 
-app = Flask(__name__)
+<br> Make a directory mkdir hello_flask
+<br> Make a python file touch app.py
+<br> from flask import Flask #We start by importing flask, we are basically creating a new flask application instance 
+<br> app = Flask(__name__)
 
-@app.route('/') #Then we're defining a route for the route url which is forward slash / kind of like when you go to google.com/ but the / isn't there most of the time because thats the route url
-def hello_world():
-    return 'Hello, world!' #So when someone vists the url the hello world function is called
+<br> @app.route('/') #Then we're defining a route for the route url which is forward slash / kind of like when you go to google.com/ but the / isn't there most of the time because thats the route url
+<br> def hello_world():
+<br>     return 'Hello, world!' #So when someone vists the url the hello world function is called
 
-if  __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000) #We are running the application by doing app.run we're using the variable name flask and telling it to run on our local host which is 0.0.0.0 and we're doing this on port 5000 
-To run this application on the command line without docker you do python3 app.py
+<br> if  __name__ == '__main__':
+<br>     app.run(host='0.0.0.0', port=5000) #We are running the application by doing app.run we're using the variable name flask and telling it to run on our local host which is 0.0.0.0 and we're doing this on port 5000 
+<br> To run this application on the command line without docker you do python3 app.py
 ### Containerise our Web Application with Docker
-Now we will take that web application that we made and containerise it using docker
-First we need to write a docker file, the docker file is a text file that containes a series of instructions on how to build a container image for our application
+<br> Now we will take that web application that we made and containerise it using docker
+<br> First we need to write a docker file, the docker file is a text file that containes a series of instructions on how to build a container image for our application
 We do touch Dockerfile, You have to capitalise the first letter when creating a dockerfile and it doesn't have an extension.
 
 #We use the python image and the version
