@@ -32,6 +32,11 @@ Images - Images are templates for creating containers, you can think of an image
 <br> The immutability ensures that the application runs consistently no matter where it's deployed.
 <br> Containers on the other hand are the running instances of images, for example if an image is a recipe a container is the dish you create from it. Containers are what you actually interact with, they run your application and you can start, stop and modify them as needed. 
 <br> Docker file - A docker file is a file used to build docker images, it contains a series of instructions that docker uses to assemble an image 
+
+Docker workflow
+<br> You create a docker file which is your recipe
+<br> You create an image which is your snapshot of the application at a given point in time
+Then you run it as a container
 ### Importance in Modern Development 
 1. Simplified Deployment - One of the biggest challenges in software development is ensuring that applications work consistently across different environments. Docker solves this problem by creating a consistent environment from development all the way to production.
 2. Improved Efficiency - Traditional virtual machines can be resource heavy and slow to start, in contrast docker containers are lightweight and share the host systems kernel which allows them to start up almost instantly and use fewer resources. This efficiency is crucial in modern development where developers can spin up containers in seconds which make easier to test and deploy applications rapidly.
@@ -88,6 +93,69 @@ A docker file is just a series of instructions on how to build the docker image.
 <br> #The expose instruction tells docker that the container will listen on the specified network ports at runtime which in this case is 3000, this is useful for when you want to run the container and expose ports to the host machine 
 <br> #This specifies the command to run when the container starts, here we are starting a node js application by running node index.js 
 <br> CMD ["node", "index.js"]
+
+### Create a Simple Web Application to Dockerise.
+Python will be used in this but you don't need to really know what it does, also be using flask flask is a simple and lightweight framework for creating web applications in python.
+<br> Make a directory mkdir hello_flask
+<br> Make a python file touch app.py
+<br> from flask import Flask #We start by importing flask, we are basically creating a new flask application instance 
+<br> app = Flask(__name__)
+
+<br> @app.route('/') #Then we're defining a route for the route url which is forward slash / kind of like when you go to google.com/ but the / isn't there most of the time because thats the route url
+<br> def hello_world():
+<br>     return 'Hello, world!' #So when someone vists the url the hello world function is called
+
+<br> if  __name__ == '__main__':
+<br>     app.run(host='0.0.0.0', port=5000) #We are running the application by doing app.run we're using the variable name flask and telling it to run on our local host which is 0.0.0.0 and we're doing this on port 5000 
+<br> To run this application on the command line without docker you do python3 app.py
+### Containerise our Web Application with Docker
+<br> Now we will take that web application that we made and containerise it using docker
+<br> First we need to write a docker file, the docker file is a text file that containes a series of instructions on how to build a container image for our application
+We do touch Dockerfile, You have to capitalise the first letter when creating a dockerfile and it doesn't have an extension.
+
+#We use the python image and the version
+FROM python:3.8-slim
+#We are setting the work directory so that any commands after this will be run in this directory
+WORKDIR /app
+#We are going to copy all of the files from our current directory
+COPY . .
+#We install flask
+RUN pip install flask
+#We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container 
+EXPOSE 5002
+#The cmd command tell docker to run our python application
+CMD ["python", "app.py"]
+
+Next step is to build your docker image use the command below
+
+docker build -t imagename . - This builds a docker image the docker build part of the command initiates the build process, the -t tags the image with a name in this case imagename, the . represents the current directory and tells docker to look for the docker file there, if we were in a different directory we would do ./ and then the name of the directory your docker file is in.
+After it builds a docker image we wull run it as a container to do that use the command below
+<br> docker run -d -p 5002:5002 nameofthecontainerwe'reusing - the -d runs the container in detached mode which means running it in the background and the -p followed by the ports is mapping the port 5002 on my machine to the port 5002 in the container and then the name of the image we're using
+
+
+## Introduction to Docker Networking
+### Basic Networking Concepts in Docker
+Understanding basic networking concepts in docker is essential for managing containerised applications effectively 
+<br> Docker provides several default network options that you can use to manage how containers commmunicate
+
+Bridge Network - A bridge network is a default network mode for containers on the same machine. Containers connected to the bridge network can communicate with each other using their own ip addresses. It's isolated from your host machines network which provides an extra layer of seccurity
+
+Host Network - In host mode, a container uses the host machines network directly without any isolation, this mode is useful for applications that need to closely interact with the host system.
+
+None type - This option gives a container no network interface at all which makes it completely isolated, it's used when you want to ensure that a container has no network access whatsoever which could be useful for certain security scenarios.
+
+In the context of DevOps, docker networking is particularly important because it simplifies the implementation of microservices architecture, microservices allow different parts of an application to run as independent services each in its own container. Docker networking ensures that these services can communicate with each other efficiently and securely.
+
+### Linking Containers together
+Before this I already created the flask(flask is a simple and lightweight framework for creating web applications in python) app.py that says hello world and containerised it with docker
+
+By connecting our flask app to a mysql database we're simulating a real world scenario where web applications often rely on databases to store and retrieve data.
+
+
+
+
+
+
 
 
 
