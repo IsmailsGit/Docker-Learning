@@ -89,6 +89,25 @@ A docker file is just a series of instructions on how to build the docker image.
 <br> #This specifies the command to run when the container starts, here we are starting a node js application by running node index.js 
 <br> CMD ["node", "index.js"]
 
+## Introduction to Docker Networking
+### Basic Networking Concepts in Docker
+Understanding basic networking concepts in docker is essential for managing containerised applications effectively 
+<br> Docker provides several default network options that you can use to manage how containers commmunicate
+
+Bridge Network - A bridge network is a default network mode for containers on the same machine. Containers connected to the bridge network can communicate with each other using their own ip addresses. It's isolated from your host machines network which provides an extra layer of seccurity
+
+Host Network - In host mode, a container uses the host machines network directly without any isolation, this mode is useful for applications that need to closely interact with the host system.
+
+None type - This option gives a container no network interface at all which makes it completely isolated, it's used when you want to ensure that a container has no network access whatsoever which could be useful for certain security scenarios.
+
+In the context of DevOps, docker networking is particularly important because it simplifies the implementation of microservices architecture, microservices allow different parts of an application to run as independent services each in its own container. Docker networking ensures that these services can communicate with each other efficiently and securely.
+
+### Linking Containers together
+
+
+
+
+
 
 
 
