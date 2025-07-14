@@ -4,8 +4,8 @@ FROM python:3.8-slim
 WORKDIR /app
 #We are going to copy all of the files from our current directory
 COPY . .
-#We install flask
-RUN pip install flask
+#We install flask and the mysql client package, the pakcage is critical because it provides the tools needed to connect to a mysql data base from within our python app  
+RUN pip install flask mysqlclient
 #We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container 
 EXPOSE 5002
 #The cmd command tell docker to run our python application
