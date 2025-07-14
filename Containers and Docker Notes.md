@@ -182,11 +182,11 @@ Dockerfile
 <br> #We are going to copy all of the files from our current directory
 <br> COPY . .
 <br> RUN apt-get update && apt-get install -y \
-<br>   gcc \
-<br>   python3-dev \
-<br>   libmariadb-dev \
-<br>   pkg-config
-<br> #We install flask and the mysql client package, the pakcage is critical because it provides the tools needed to connect to a mysql data base from within our python app
+         gcc \
+         python3-dev \
+         libmariadb-dev \
+         pkg-config
+ <br> #We install flask and the mysql client package, the pakcage is critical because it provides the tools needed to connect to a mysql data base from within our python app
 <br> RUN pip install flask mysqlclient
 <br> #We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container 
 <br> EXPOSE 5002
@@ -208,6 +208,13 @@ docker run -d --name myapp --network my-custom-network -p 5002:5002 hello-flask-
 
 Any debugging you need to do use the docker logs and then the container that isn't working for you e.g. docker logs myapp
 
+### Introduction to Docker Compose
+Docker Compose is a tool that allows you to define and manage multi container docker applications.
+<br> Instead of manually starting and stopping containers one by one, docker compose lets you define all your services in a single file and manage them collectively.
+<br> Imagine your application has several components, a web server, a database and a caching service. Docker compose acts as the organiser for these parts ensuring they work together smoothly.
 
+At the heart of docker compose is a docker-compose.yaml file, this yaml file lists all the services your application needs, it's like a blueprint that describes each container specifying details like which image to use, which port to expose and how the containers should interact.
+<br> Docker compose allows you to handle your entire stack with minimal effort
 
+Also when you use docker compose, it automatically creates a network for your containers, now we don't have to actually create a custom network.
 
