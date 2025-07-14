@@ -114,22 +114,22 @@ Python will be used in this but you don't need to really know what it does, also
 We do touch Dockerfile, You have to capitalise the first letter when creating a dockerfile and it doesn't have an extension.
 
 #We use the python image and the version
-FROM python:3.8-slim
-#We are setting the work directory so that any commands after this will be run in this directory
-WORKDIR /app
-#We are going to copy all of the files from our current directory
-COPY . .
-#We install flask
-RUN pip install flask
-#We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container 
-EXPOSE 5002
-#The cmd command tell docker to run our python application
-CMD ["python", "app.py"]
+<br> FROM python:3.8-slim
+<br> #We are setting the work directory so that any commands after this will be run in this directory
+<br> WORKDIR /app
+<br> #We are going to copy all of the files from our current directory
+<br> COPY . .
+<br> #We install flask
+<br> RUN pip install flask
+<br> #We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container 
+<br> EXPOSE 5002
+<br> #The cmd command tell docker to run our python application
+<br> CMD ["python", "app.py"]
 
 Next step is to build your docker image use the command below
 
 docker build -t imagename . - This builds a docker image the docker build part of the command initiates the build process, the -t tags the image with a name in this case imagename, the . represents the current directory and tells docker to look for the docker file there, if we were in a different directory we would do ./ and then the name of the directory your docker file is in.
-After it builds a docker image we wull run it as a container to do that use the command below
+<br> After it builds a docker image we wull run it as a container to do that use the command below
 <br> docker run -d -p 5002:5002 nameofthecontainerwe'reusing - the -d runs the container in detached mode which means running it in the background and the -p followed by the ports is mapping the port 5002 on my machine to the port 5002 in the container and then the name of the image we're using
 
 
@@ -151,14 +151,51 @@ Before this I already created the flask(flask is a simple and lightweight framew
 
 By connecting our flask app to a mysql database we're simulating a real world scenario where web applications often rely on databases to store and retrieve data.
 
+app.py
+<br> from flask import Flask
+<br> import MySQLdb
+<br> #We import the mysql database library as it is essential for establishing a connection to <br> a mysql database, this library enables us to execute sql commands within our python application
+<br> app = Flask(__name__)
 
+@app.route('/')
+<br> def hello_world():
+<br>   #Connect to the MySQL database
+<br>    db = MySQLdb.connect( #We are trying to establish a connection with the mysql database
+<br>        host="mydb",    # Hostname of the MySQL container
+<br>        user="root",    # Username to connect to MySQL
+<br>        passwd="my-secret-pw",  # Password for the MySQL user
+<br>        db="mysql"      # Name of the database to connect to
+<br>   )
+<br>   cur = db.cursor()
+<br>   cur.execute("SELECT VERSION()")
+<br>   version = cur.fetchone()
+<br>   return f'Hello, World! MySQL version: {version[0]}'
 
+if __name__ == '__main__':
+<br>   app.run(host='0.0.0.0', port=5002)
 
+Dockerfile
+#We use the python image and the version
+<br> FROM python:3.8-slim
+<br> #We are setting the work directory so that any commands after this will be run in this directory
+<br> WORKDIR /app
+<br> #We are going to copy all of the files from our current directory
+<br> COPY . .
+<br> #We install flask and the mysql client package, the pakcage is critical because it provides the tools needed to connect to a mysql data base from within our python app
+<br> RUN pip install flask mysqlclient
+<br> #We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container 
+<br> EXPOSE 5002
+<br> #The cmd command tell docker to run our python application
+<br> CMD ["python", "app.py"]
 
+Before we move on to the process of building and running our updated containers we need to create a custom network> Why a custom network? In docker creating a custom network allows containers to communicate with each other using container names instead of ip addresses, this is useful as we need the flask app to interact with the mysql database.
 
+We are going to use the command docker network create my-custom-network, this command creates a network for us called the my-custom-network which we'll use to connect our flask and mysql containers together.
 
+Next is running the containers first we'll run the mysql container to do this we'll do 
+docker run -d --name mydb --network my-custom-network -e MYSQL_ROOT_PASSWORD=make-a-password mysql:5.7   - mydb is the container name im giving it  and i'm setting the network to my-custom-network so that we can connect our database container/mysql container to my custom network and here -e MYSQL_ROOT_PASSWORD=my-secret-pw we are setting the root password for the mysql database, this password is necessary for authentication when connecting to the database. Lastly we are going to specify the version of mysql by doing mysql:5.7
 
-
-
+Now we're going to build the docker image for the flask app with the updated dockerfile
+docker build -t hello-flask-mysql .
 
 
