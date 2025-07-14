@@ -181,6 +181,11 @@ Dockerfile
 <br> WORKDIR /app
 <br> #We are going to copy all of the files from our current directory
 <br> COPY . .
+<br> RUN apt-get update && apt-get install -y \
+<br>   gcc \
+<br>   python3-dev \
+<br>   libmariadb-dev \
+<br>   pkg-config
 <br> #We install flask and the mysql client package, the pakcage is critical because it provides the tools needed to connect to a mysql data base from within our python app
 <br> RUN pip install flask mysqlclient
 <br> #We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container 
@@ -196,6 +201,13 @@ Next is running the containers first we'll run the mysql container to do this we
 docker run -d --name mydb --network my-custom-network -e MYSQL_ROOT_PASSWORD=make-a-password mysql:5.7   - mydb is the container name im giving it  and i'm setting the network to my-custom-network so that we can connect our database container/mysql container to my custom network and here -e MYSQL_ROOT_PASSWORD=my-secret-pw we are setting the root password for the mysql database, this password is necessary for authentication when connecting to the database. Lastly we are going to specify the version of mysql by doing mysql:5.7
 
 Now we're going to build the docker image for the flask app with the updated dockerfile
-docker build -t hello-flask-mysql .
+<br> docker build -t hello-flask-mysql .
+
+Now we're going to run our flask application 
+docker run -d --name myapp --network my-custom-network -p 5002:5002 hello-flask-mysql - -d is detached mode so its running in the background, --name myapp is the name i chose for it , we're also going to attach this container to the same network we attached our database container, we're going to use the ports 5002 on our local laptops to the port 5002 on our container, we're going to use the image hello-flask-mysql which is the image we just created.
+
+Any debugging you need to do use the docker logs and then the container that isn't working for you e.g. docker logs myapp
+
+
 
 
