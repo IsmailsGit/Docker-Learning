@@ -220,10 +220,18 @@ Also when you use docker compose, it automatically creates a network for your co
 ### Why is Docker Compose Important in DevOps?
 Docker compose is an essential component of a streamlined efficient devops workflow
 
-1. Makes Development and testing easier - One of the biggest challenges in development is setting up a consistent environment for coding and testing, docker compose simplifies this by allowing you to quickly spin up the exact environment you need with all of the necessary services, whether it's a web server, database, cache etc. Instead of manually setting up each service you define everything in a docker-compose.yaml file and run a single command to start the entire environment. This speed and simplicity means the developers can focus more on writing code and less on managing infrastructure.
+1. Makes Development and Testing Easier - One of the biggest challenges in development is setting up a consistent environment for coding and testing, docker compose simplifies this by allowing you to quickly spin up the exact environment you need with all of the necessary services, whether it's a web server, database, cache etc. Instead of manually setting up each service you define everything in a docker-compose.yaml file and run a single command to start the entire environment. This speed and simplicity means the developers can focus more on writing code and less on managing infrastructure.
 
-2. Ensures Consistency -   
+2. Ensures Consistency -  A common issue in software development is code working on one developers machine but not on anothers. By defining the environment in a docker compose yaml file you guarantee that every developer, tester and cicd pipeline uses the exact same setup, it's consistency reduces bugs and errors leading to more reliable software.
 
+3. Enhances Teamwork -  Collaboration is a cornerstone of devops and docker compose enhances teamwork, when every team member is using the same environment it becomes easier to share code, configurations and even the environment set up itself. Docker compose makes it simple to version control your infrastructure alongside your application code, e.g. when someone pulls the latest code from your repo they also get the exact environment set up needed to run the application. 
+
+### Our First docker-compose.yml
+Think of the docker-compose.yml file as a recipe that lists all the ingredients i.e. the services that your application needs, instead on launching each container separately you write down everything in this one file and docker compose takes care of the rest.
+
+You can specify which docker image to use, how the containers should interact and even what ports to expose.
+
+For our app.py hello world application that connects to a mysql database we are going to create a docker-compose.yml file that runs both services with just one command.
 
 
 
