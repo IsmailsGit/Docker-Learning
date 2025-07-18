@@ -233,10 +233,26 @@ You can specify which docker image to use, how the containers should interact an
 
 For our app.py hello world application that connects to a mysql database we are going to create a docker-compose.yml file that runs both services with just one command.
 
+First we make the file so touch docker-compose.yml
+<br> then copy and paste 
+version: '3.8' #The version tells docker compose which version of the file format we're using 
 
+<br> services: #The services is where we list all the different parts of our app, which is the web service(our flask application) and a database
+<br>   web:
+<br>   build: . #This tells docker compose to build the web service from the docker file in the current directory that's what the dot means
+<br>    ports:
+<br>     - "5002:5002" #We set the ports to 5002 for the web service
+<br>   depends_on:
+<br>     - db  #This line means that the web service depends on the database service, so docker compose will start the database service first before starting the web service
 
+<br> db:
+<br>   image: mysql:8 #We are using an image we found online, this tells docker compose which image version we're using
+<br>   environment:
+<br>   MYSQL_ROOT_PASSWORD: my-secret-pw  #We set the environment variable mysql root password which we set to my secret pw
 
-
+Now with everything set up in the docker-compose.yml file we can start up both the flask application and the mysql database with just one command.
+<br> docker-compose up - It tells docker compose to read the docker-compose.yml, build an necessary images and start all the services you've defined 
+<br> docker-compose up -d - does the same thing but runs it in the background
 
 
 
