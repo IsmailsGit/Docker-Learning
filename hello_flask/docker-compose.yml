@@ -1,0 +1,14 @@
+#ersion: '3.8' #The version tells docker compose which version of the file format we're using 
+
+services: #The services is where we list all the different parts of our app, which is the web service(our flask application) and a database
+  web:
+    build: . #This tells docker compose to build the web service from the docker file in the current directory that's what the dot means
+    ports:
+      - "5002:5002" #We set the ports to 5002 for the web service
+    depends_on:
+     - mydb       #This line means that the web service depends on the database service, so docker compose will start the database service first before starting the web service
+
+  mydb:
+    image: mysql:8 #We are using an image we found online, this tells docker compose which image version we're using
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw  #We set the environment variable mysql root password which we set to my secret pw
