@@ -295,5 +295,19 @@ Also changed app.py as it wasn't connecting to the mysql database properly and w
 
 if __name__ == '__main__':
 <br> app.run(host='0.0.0.0', port=5002)
+## Docker Registries
+Where do docker images go after you've built them?
+That's where docker registries come into play, docker registries are crucial for managing, storing and deploying your docker images.  
+
+### Introduction to Docker Registries
+
+
+
+
+
+
+
+
+
 
 
