@@ -254,5 +254,46 @@ Now with everything set up in the docker-compose.yml file we can start up both t
 <br> docker-compose up - It tells docker compose to read the docker-compose.yml, build an necessary images and start all the services you've defined 
 <br> docker-compose up -d - does the same thing but runs it in the background
 
+Also changed app.py as it wasn't connecting to the mysql database properly and wasn't printing out the version here is the updated version
+
+<br> from flask import Flask
+<br>import MySQLdb
+#We import the mysql database library as it is essential for establishing a connection to a mysql database, this library enables us to execute sql commands within our python application
+<br>import time
+<br>app = Flask(__name__)
+
+#This function attempts to connect to the MySQL database, retrying if it fails
+<br>def connect_with_retry(retries=5, delay=3):
+    # Loop up to 'retries' number of times (default is 5)
+<br>    for i in range(retries):
+<br>      try:
+<br>            # Try to connect to the MySQL database
+<br>            db = MySQLdb.connect(
+<br>            host="mydb",           # Hostname of the MySQL service defined in docker-compose
+<br>            user="root",           # MySQL username
+<br>            passwd="my-secret-pw", # Password for the user
+<br>            db="mysql"             # Database name to connect to
+<br>          )
+<br>          return db  # If connection is successful, return the db object
+<br>    except Exception as e:
+<br>        # If connection fails, print the error with attempt number
+<br>        print(f"Attempt {i+1} failed: {e}")
+<br>        time.sleep(delay)  # Wait for a few seconds before retrying
+<br>  # If all retries fail, raise an exception to stop the app
+<br>  raise Exception("Could not connect to MySQL after multiple attempts.")
+
+<br> @app.route('/')
+<br> def hello_world():
+<br>   print("Attempting to connect to MySQL...")
+<br>   db = connect_with_retry()
+<br>   print("Connected to MySQL!")
+<br>   cur = db.cursor()
+<br>   cur.execute("SELECT VERSION()")
+<br>   version = cur.fetchone()
+<br>   print(f"MySQL version fetched: {version}")
+<br>   return f'Hello, World! MySQL version: {version[0]}'
+
+if __name__ == '__main__':
+<br> app.run(host='0.0.0.0', port=5002)
 
 
