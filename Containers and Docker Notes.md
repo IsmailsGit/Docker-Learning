@@ -307,13 +307,32 @@ Key Features
 <br> Public Registries - A public registry like dockerhub is open to everyone, you can share your images with the world or use community provided images as the foundation for your applications.
 <br> Private Registries - You have private registries like AWS ECR which is secure and restricted, so only you have access to these images and they allow you to control who has access to your images so you can make it public or private.
 
-Importance of Docker Registries in DevOps
+### Importance of Docker Registries in DevOps
 
 1. Streamlines the deployment process - Once your docker images are stored in a registry, they can be easily accessed and deployed across multiple environments from development all the way to production, this makes it faster and more reliable to roll out new features or updates.
 
 2. Enhances Collaboration within your team - When your images are stored in a centralised registry, everyone on your team has access to the same resources this makes it easier to share and manage images, improving teamwork and efficiency.
 
 3. Ensures Consistency across different environments - By storing your images in a registry, you can be sure that the exact same image is being used in development, testing and production, eliminates the 'it only works on my machine' problem, ensuring what you've tested locally is exactly what runs in production.
+
+How do Registries fit into the overall DevOps workflow?
+
+Docker registries are used to build, so where you start building your docker image locally e.g. where we created a dockerfile and we built the image. 
+<br> Before pushing the image to a registry you test it to ensure everything worked as expected, so you create a container out of it to make sure the application runs.
+<br> Once the image is ready and the application runs as expected then you push the image to a docker registry like AWS ECR.
+<br>Finally you pull that image from the registry to deploy it in your production or staging environment.
+
+Future reference - This is where pipelines(CICD module) come in later on, where you are pulling the images that you've built directly from this registry, so once you've pushed the image to the registry, you're now pulling the image within your pipeline so you can do this automatically.
+### DockerHub: A Popular Docker Registry
+Dockerhub is basically a public registry where you can store, share and access docker images, it's like the app store for docker images.
+
+Whether you want to use prebuilt images, share your own or collaborate with others DockerHub is the place to do it.
+
+
+
+
+
+
 
 
 
