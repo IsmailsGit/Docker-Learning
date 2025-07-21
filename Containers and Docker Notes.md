@@ -328,10 +328,13 @@ Dockerhub is basically a public registry where you can store, share and access d
 
 Whether you want to use prebuilt images, share your own or collaborate with others DockerHub is the place to do it.
 
+Pushing an image to DockerHub
+<br> First we need to build and tag our image correctly to do this do the command underneath
 
+docker build -t ismailsdocker1/flask-mysql:v1 . - -t means we're tagging it then my dockerhub username and forward slash the repository i made and then colon the tag, the tag can be something like latest or a version in this case i call it v1 for version 1. The dot tells docker to use the current directory as the build context where it will look for the docker file.
 
-
-
+Then once our image is built and tagged we can push it to dockerhub, the command is 
+docker push ismailsdocker1/flask-mysql:v1 - The command uploads your image to dockerhub under the specified repository name  
 
 
 
