@@ -343,6 +343,37 @@ docker pull ismailsdocker1/flask-mysql:v1 - docker pull followed by your dockerh
 AWS ECR is a fully managed docker registry service thats great for storing and managing private docker images.
 
 
+Build
+We first build our docker image, we use this command docker build -t ecr-flask-mysql . - I got this from the aws push commands page
+
+Tag
+Just like we did with dockerhub, we need to tag our docker images before pushing it to ecr but the difference is that we also need to tag the image with the ecr repository url.
+docker tag ecr-flask-mysql:latest 043309335662.dkr.ecr.us-east-1.amazonaws.com/ecr-flask-mysql:latest - You can get this from the aws push commands page.
+
+Push
+Next I have to push the docker image using the command docker push 043309335662.dkr.ecr.us-east-1.amazonaws.com/ecr-flask-mysql:latest - again you can get this from the aws push commands page
+
+Pull
+If you want to then pull this image to your local machine you do the command
+docker pull 043309335662.dkr.ecr.us-east-1.amazonaws.com/ecr-flask-mysql:latest - Same command as the docker push but you just change it pull. It's pulling the image that's stored in our ecr repository to our local docker environment ready to by run as a container.
+
+Run as a container 
+#Create a custom Docker network
+docker network create my-app-network
+
+#Run a MySQL container on the custom network
+docker run -d --name mydb --network my-app-network -e MYSQL_ROOT_PASSWORD=my-secret-pw mysql:8
+With that we created this database in our myapp network
+
+Then finally run as a container
+#Run a Flask container on the custom network, mapping port 5002 and using the specified image
+docker run -p 5002:5002 --network my-app-network 043309335662.dkr.ecr.us-east-1.amazonaws.com/ecr-flask-mysql:latest - docker run then the port 5002 in the container and 5002 on our local machine, then our custom network followed by the url.
+
+
+
+
+
+
 
 
 
