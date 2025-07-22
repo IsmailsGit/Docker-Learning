@@ -390,10 +390,12 @@ Then do docker-compose up
 
 Successfully used docker compose to manage a multi container application using an image we pulled from AWS ECR 
 
+### Important Docker Commands to know!
+These commands will help you keep your docker environments clean, organised and running smoothly especially as you start working with more images and containers in your projects.
 
+docker images - It will give you all the images that you have stored locally, it will display a list of all the docker images on the system, including details like the repository name, the version, the id, when it was created and the size. Useful to see which images are available and which you would like to clean up.
 
-
-
+docker inspect imageid (You can use the docker images command to see the imageid) - 
 
 
 
