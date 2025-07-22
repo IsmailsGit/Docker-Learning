@@ -339,7 +339,8 @@ docker push ismailsdocker1/flask-mysql:v1 - The command uploads your image to do
 #### Pulling an image from DockerHub
 docker pull ismailsdocker1/flask-mysql:v1 - docker pull followed by your dockerhub username, your repository name and the tag v1. You are downloading the image to your local machine where you can run it as a container.
 
-#### Pushing our Images to Amazon ECR 
+#### Pushing our Images to Amazon ECR(Elastic Container Registry)
+AWS ECR is a fully managed docker registry service thats great for storing and managing private docker images.
 
 
 
