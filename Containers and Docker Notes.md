@@ -1,4 +1,4 @@
-# Introduction to Containers and Docker 
+ # Introduction to Containers and Docker 
 ## What are Containers?
 Containers are lightweight, portable units for running applications.
 <br> They bundle an application with all its dependencies ensuring it runs consistently across different environments.
@@ -342,6 +342,7 @@ docker pull ismailsdocker1/flask-mysql:v1 - docker pull followed by your dockerh
 #### Pushing our Images to Amazon ECR(Elastic Container Registry)
 AWS ECR is a fully managed docker registry service thats great for storing and managing private docker images.
 
+To log in to ecr from the command line do this command aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 043309335662.dkr.ecr.us-east-1.amazonaws.com - I got this from the ecr push commands page.
 
 Build
 We first build our docker image, we use this command docker build -t ecr-flask-mysql . - I got this from the aws push commands page
@@ -368,6 +369,29 @@ With that we created this database in our myapp network
 Then finally run as a container
 #Run a Flask container on the custom network, mapping port 5002 and using the specified image
 docker run -p 5002:5002 --network my-app-network 043309335662.dkr.ecr.us-east-1.amazonaws.com/ecr-flask-mysql:latest - docker run then the port 5002 in the container and 5002 on our local machine, then our custom network followed by the url.
+
+#### Using Docker Compose to run the image we pull from ECR as a container
+version: '3.8' #The version tells docker compose which version of the file format we're using 
+
+<br> services: #The services is where we list all the different parts of our app, which is the web service(our flask application) and a database
+<br>   web:
+<br>   image: 043309335662.dkr.ecr.us-east-1.amazonaws.com/ecr-flask-mysql:latest  #Instead of building the image locally we are going to replace it with image and paste our ecr repository
+<br>    ports:
+<br>     - "5002:5002" #We set the ports to 5002 for the web service
+<br>   depends_on:
+<br>     - mydb  #This line means that the web service depends on the database service, so docker compose will start the database service first before starting the web service
+
+<br> db:
+<br>   image: mysql:8 #We are using an image we found online, this tells docker compose which image version we're using
+<br>   environment:
+<br>   MYSQL_ROOT_PASSWORD: my-secret-pw  #We set the environment variable mysql root password which we set to my secret pw
+
+Then do docker-compose up
+
+Successfully used docker compose to manage a multi container application using an image we pulled from AWS ECR 
+
+
+
 
 
 
