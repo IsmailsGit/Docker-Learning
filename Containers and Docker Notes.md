@@ -395,7 +395,12 @@ These commands will help you keep your docker environments clean, organised and 
 
 docker images - It will give you all the images that you have stored locally, it will display a list of all the docker images on the system, including details like the repository name, the version, the id, when it was created and the size. Useful to see which images are available and which you would like to clean up.
 
-docker inspect imageid (You can use the docker images command to see the imageid) - 
+docker inspect imageid (You can use the docker images command to see the imageid) - Gives us the details about the image 
+
+docker rmi imageid - Used to remove images that you no longer need, if an image is still being used by a container docker won't remove it and you will need to stop and remove the container first.
+
+docker system prune - Removes all unused images, containers, networks and volumes in one go, useful for clearing out resources that are no longer needed. 
+
 
 
 
