@@ -399,10 +399,22 @@ docker inspect imageid (You can use the docker images command to see the imageid
 
 docker rmi imageid - Used to remove images that you no longer need, if an image is still being used by a container docker won't remove it and you will need to stop and remove the container first.
 
-docker system prune - Removes all unused images, containers, networks and volumes in one go, useful for clearing out resources that are no longer needed. 
+docker system prune - Removes all unused images, all networks not used by at least one container in one go, useful for clearing out resources that are no longer needed. 
 
+docker ps - Shows you the containers that are currently running
+docker ps -a - Shows you all of the containers including the ones not in use.
 
+docker stop containerid - Stops running containers, but doesn't remove them.
+docker rm containerid - Removes containers
+### Making Our Image Lighter: Multistage Builds
+Large images can slow down deployments, it consumes more bandwidth and requires more storage.
+We will be learning how to optimise our docker file using multistage builds.
 
+What are multistage builds? - Multistage builds in docker allows you to use multiple from statements in your docker file.
+The idea of a multi stage build using from statements is to use one stage to build your application and another much lighter stage to create the final image that you actually deploy.
+
+There's a part that requires all the dependencies to build the application, but all those dependencies are not then required in the actual final image.
+This lets you discard any unnecessary files and dependencies resulting in a much smaller optimised image.
 
 
 
