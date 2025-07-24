@@ -410,7 +410,7 @@ docker rm containerid - Removes containers
 Large images can slow down deployments, it consumes more bandwidth and requires more storage.
 We will be learning how to optimise our docker file using multistage builds.
 
-What are multistage builds? - Multistage builds in docker allows you to use multiple from statements in your docker file.
+What are multistage builds? - Multistage builds in docker allow you to use multiple from statements in your docker file.
 The idea of a multi stage build using from statements is to use one stage to build your application and another much lighter stage to create the final image that you actually deploy.
 
 There's a part that requires all the dependencies to build the application, but all those dependencies are not then required in the actual final image.
