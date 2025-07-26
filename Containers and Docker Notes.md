@@ -447,6 +447,24 @@ EXPOSE 5002
 
 CMD ["python", "app.py"]
 
+The file size has decreased because we removed all the build tools and only kept what's needed for the runtime environment
+
+### Advanced Topic Overview
+As you start working with larger applications or deploying your services in production, managing your individual containers manually becomes increasingly challenging. Even if you have to use docker compose it's still challenging because you would be dealing with hundreds of containers.
+
+This is where advanced tools like Kubernetes and Docker Swarm come in to play.
+These tools are essential for automating, scaling and managing containerised applications in production environments.
+
+#### Brief Kubernetes Introduction
+What is Kubernetes(Sometimes known as K8's) - Kubernetes is an open source platform designed to automate the deployment, scaling and operation of application containers. 
+
+It takes container management to the next level by providing advanced features like container orchestration, automatic scaling and self-healing. These features ensure that your application runs smoothly and efficiently, no matter the scale. 
+
+How does Kubernetes actually help? - It helps the solve challenges that arise when you move beyond a handful of containers on a single machine like we've been doing in this section, to managing a fleet of containers across multiple machines.
+
+It abstracts the underlying infrastructure allowing you to focus more on your application rather than the intricacies of managing individual containers. Meaning developers want to focus on application code, all these tools help developers do that because it manages all of this for them.
+
+#### Docker Swarm vs Kubernetes
 
 
 
