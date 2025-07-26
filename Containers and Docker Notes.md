@@ -456,15 +456,43 @@ This is where advanced tools like Kubernetes and Docker Swarm come in to play.
 These tools are essential for automating, scaling and managing containerised applications in production environments.
 
 #### Brief Kubernetes Introduction
-What is Kubernetes(Sometimes known as K8's) - Kubernetes is an open source platform designed to automate the deployment, scaling and operation of application containers. 
+What is Kubernetes(sometimes known as K8's) - Kubernetes is an open source platform designed to automate the deployment, scaling and operation of application containers. 
 
 It takes container management to the next level by providing advanced features like container orchestration, automatic scaling and self-healing. These features ensure that your application runs smoothly and efficiently, no matter the scale. 
 
-How does Kubernetes actually help? - It helps the solve challenges that arise when you move beyond a handful of containers on a single machine like we've been doing in this section, to managing a fleet of containers across multiple machines.
+How does Kubernetes actually help? - It helps solve the challenges that arise when you move beyond a handful of containers on a single machine like we've been doing in this section, to managing a fleet of containers across multiple machines.
 
 It abstracts the underlying infrastructure allowing you to focus more on your application rather than the intricacies of managing individual containers. Meaning developers want to focus on application code, all these tools help developers do that because it manages all of this for them.
 
 #### Docker Swarm vs Kubernetes
+
+Docker swarm is docker's native clustering and orchestration tool built into docker, which means it's very easy to set up and use, especially if you're already familiar with docker's commands and environments
+
+Kubernetes is a more complex and feature rich container orchestration platform, it was originally developed by google, it has become the industry standard for managing containers at scale. Kubernetes offers greater flexibility and scalability which is essential for large scale enterprise level deployments.
+
+Key features
+
+Docker Swarm                                   |                         Kubernetes
+1. No Auto Scaling                                 2. Auto Scaling
+Docker swarm does not have built in auto scaling    Kubernetes has built-in autoscaling features
+capabilities which means you'll need to manage      allowing your applications to automatically 
+scaling manually or through external tools         scale up or down based on demand which is 
+                                                   critical for handling 
+3. Good Community
+It has a good community while not as large as
+kubernetes, docker swarm has a solid community
+that supports it.
+
+4. Easy to start a Cluster
+It's easier to start a cluster which is one of
+docker swarms biggest strengths, starting a swarm
+cluster is simple and integrates seamlessly with
+existing docker setups.
+
+5. Limited to the Docker API's Capabilities
+
+
+
 
 
 
