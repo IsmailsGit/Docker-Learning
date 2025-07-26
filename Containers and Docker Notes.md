@@ -416,7 +416,10 @@ The idea of a multi stage build using from statements is to use one stage to bui
 There's a part that requires all the dependencies to build the application, but all those dependencies are not then required in the actual final image.
 This lets you discard any unnecessary files and dependencies resulting in a much smaller optimised image.
 
+Docker file
+
 #Stage 1: Build Stage
+
 FROM python:3.8-slim as build 
 
 WORKDIR /app
@@ -432,7 +435,7 @@ COPY . .
 
 RUN pip install flask mysqlclient
 
-# Stage 2: Production Stage
+#Stage 2: Production Stage
 
 FROM python:3.8-slim
 
