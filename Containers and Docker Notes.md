@@ -406,6 +406,10 @@ docker ps -a - Shows you all of the containers including the ones not in use.
 
 docker stop containerid - Stops running containers, but doesn't remove them.
 docker rm containerid - Removes containers
+
+If you are trying to make an image from a docker file but it is the second dockerfile you've made that you're trying to a make an image from use this command
+docker build -f TheSecondDockerfile.YouMade -t imagename .
+
 ### Making Our Image Lighter: Multistage Builds
 Large images can slow down deployments, it consumes more bandwidth and requires more storage.
 We will be learning how to optimise our docker file using multistage builds.
