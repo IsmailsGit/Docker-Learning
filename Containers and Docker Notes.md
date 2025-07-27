@@ -406,6 +406,10 @@ docker ps -a - Shows you all of the containers including the ones not in use.
 
 docker stop containerid - Stops running containers, but doesn't remove them.
 docker rm containerid - Removes containers
+
+If you are trying to make an image from a docker file but it is the second dockerfile you've made that you're trying to a make an image from use this command
+docker build -f TheSecondDockerfile.YouMade -t imagename .
+
 ### Making Our Image Lighter: Multistage Builds
 Large images can slow down deployments, it consumes more bandwidth and requires more storage.
 We will be learning how to optimise our docker file using multistage builds.
@@ -501,9 +505,16 @@ So in summary
 Orchestration tools are designed to help you manage large scale deployments and ensure that your application runs smoothly across multiple environments.
 
 Manage Large Scale Deployments
-Orchestration tools like Kubernetes and Docker Swarm are built to handle large numbers of containers spread across multiple machines. This makes it easier to manage complex environments by automating the deployment operation
+Orchestration tools like Kubernetes and Docker Swarm are built to handle large numbers of containers spread across multiple machines. This makes it easier to manage complex environments by automating the deployment operation and scaling of contaniners
 
+Ensure High Availability for Your Applications
+They automatically monitor the state of your containers and can restart or relocate them in case of failure. This ensures that your applications remain available and can recover from failures without manual intervention.
 
+Automate Scaling and Recovery 
+These tools can automatically scale your applications up or down based on demand, which is crucial for maintaining performance during peak times and saving resources during lower usage periods. Additionally, they offer self-healing capabilities by detecting and restarting failed containers, ensuring continuous service.
+
+You can also 
+simplify complex deployments, enhance reliability and improve resource utilisation 
 
 
 
