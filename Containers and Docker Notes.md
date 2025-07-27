@@ -501,9 +501,16 @@ So in summary
 Orchestration tools are designed to help you manage large scale deployments and ensure that your application runs smoothly across multiple environments.
 
 Manage Large Scale Deployments
-Orchestration tools like Kubernetes and Docker Swarm are built to handle large numbers of containers spread across multiple machines. This makes it easier to manage complex environments by automating the deployment operation
+Orchestration tools like Kubernetes and Docker Swarm are built to handle large numbers of containers spread across multiple machines. This makes it easier to manage complex environments by automating the deployment operation and scaling of contaniners
 
+Ensure High Availability for Your Applications
+They automatically monitor the state of your containers and can restart or relocate them in case of failure. This ensures that your applications remain available and can recover from failures without manual intervention.
 
+Automate Scaling and Recovery 
+These tools can automatically scale your applications up or down based on demand, which is crucial for maintaining performance during peak times and saving resources during lower usage periods. Additionally, they offer self-healing capabilities by detecting and restarting failed containers, ensuring continuous service.
+
+You can also 
+simplify complex deployments, enhance reliability and improve resource utilisation 
 
 
 
