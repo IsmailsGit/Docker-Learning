@@ -1,17 +1,27 @@
-#We use the python image and the version
-FROM python:3.8-slim
-#We are setting the work directory so that any commands after this will be run in this directory
+#Stage 1: Build Stage
+FROM python:3.8-slim as build 
+
 WORKDIR /app
-#We are going to copy all of the files from our current directory
-COPY . .
+
 RUN apt-get update && apt-get install -y \
     gcc \
     python3-dev \
     libmariadb-dev \
     pkg-config
-#We install flask and the mysql client package, the pakcage is critical because it provides the tools needed to connect to a mysql data base from within our python app  
+
+COPY . . 
+#The first . is to say what files in our current directory we want to copy, the second . is where in our container do we want to store it, referring to the  /app directory cos once we set the work directory our , becomes the app directory
+
 RUN pip install flask mysqlclient
-#We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container 
+
+# Stage 2: Production Stage
+
+FROM python:3.8-slim
+
+WORKDIR /app
+
+COPY --from=Build /app /app
+#Means we're only going to copy the necessary files from the build stage, we specify app as that's where the file is stored
 EXPOSE 5002
-#The cmd command tell docker to run our python application
+
 CMD ["python", "app.py"]

@@ -2,7 +2,7 @@ version: '3.8'  #The version tells docker compose which version of the file form
 
 services:  #The services is where we list all the different parts of our app, which is the web service(our flask application) and a database
   web:
-    build: .  #This tells docker compose to build the web service from the docker file in the current directory that's what the dot means
+    image:  043309335662.dkr.ecr.us-east-1.amazonaws.com/ecr-flask-mysql:latest  #Instead of building the image locally we are going to replace it with image and paste our ecr repository
     ports:
       - "5002:5002"
     depends_on:  #We set the ports to 5002 for the web service
