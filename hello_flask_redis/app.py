@@ -18,5 +18,5 @@ def hello_world():
     return f'Hello, world! We are using Redis' #So when someone vists the url the hello world function is called
 
 
-if name == 'main':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
