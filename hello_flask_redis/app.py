@@ -2,7 +2,7 @@
 
 from flask import Flask #We start by importing flask, we are basically creating a new flask application instance
 import redis
-app = Flask(name)
+app = Flask(__name__)
 
 
 @app.route('/') #Then we're defining a route for the route url which is forward slash / kind of like when you go to google.com/ but the / isn't there most of the time because thats the route url
