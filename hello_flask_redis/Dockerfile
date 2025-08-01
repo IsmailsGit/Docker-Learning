@@ -14,4 +14,4 @@ RUN pip install flask redis
 #We expose port 5002, we are making this port available so we can access the container from our local host, this makes the application accessible from outside the container
 EXPOSE 5000
 #The cmd command tell docker to run our python application
-CMD ["python", "app2.py"]
+CMD ["python", "app.py"]
