@@ -1,11 +1,22 @@
+# app.py
+
 from flask import Flask #We start by importing flask, we are basically creating a new flask application instance
+import redis
 app = Flask(__name__)
 
 
 @app.route('/') #Then we're defining a route for the route url which is forward slash / kind of like when you go to google.com/ but the / isn't there most of the time because thats the route url
 def hello_world():
-    return 'Hello, world! I am using Redis as a database!' #So when someone vists the url the hello world function is called
+   db = redis.connect(
+    host="mydb"
+    user="root"
+    passwd="my-secret-pw2"
+    db="redis"
+   )
+   
+   
+    return f'Hello, world! We are using Redis' #So when someone vists the url the hello world function is called
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000) #We are running the application by doing app.run we're using the variable name flask and telling it to run on our local host which is 0.0.0.0 and we're doing this on port 5000
+    app.run(host='0.0.0.0', port=5000)
