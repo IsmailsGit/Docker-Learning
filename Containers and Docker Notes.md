@@ -181,7 +181,7 @@ Dockerfile
 <br> WORKDIR /app
 <br> #We are going to copy all of the files from our current directory
 <br> COPY . .
-<br> RUN apt-get update && apt-get install -y \
+<br> RUN apt-get update && apt-get install -y \ #the -y prevents docker from pausing to ask for confirmation and the slash is just to make it look neater
          gcc \
          python3-dev \
          libmariadb-dev \
