@@ -1,0 +1,16 @@
+version: "3.9" 
+
+services: 
+  app:
+    build: .
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python3 app.py
+    depends_on:
+      -  redis
+  redis:
+    image: redis:latest
+    ports: 
+        - "6379:6379"
+  
