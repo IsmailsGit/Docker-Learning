@@ -1,6 +1,6 @@
 import redis
 from flask import Flask
-app=Flask(__name__)
+app = Flask(__name__)
 
 r = redis.Redis( #Instantiate a Redis client, connecting to local host on port 6379
      host="redis",
@@ -15,12 +15,14 @@ def home_page():
 @app.route("/count")
 def count_page():
 #SET command: store a string value under 'foo'
-     r.incr()
+     r.set("visit_count")
+     r.incr("vist_count")
 #GET command: retrieve the value stored at 'foo'
-     value = r.get("foo")
+     value = r.get("visit_count")
      return f"This is the value: {value.decode()}"
 
-
+if __name__ == "__main__": 
+    app.run(host="0.0.0.0", port=5000)
 
 
 
