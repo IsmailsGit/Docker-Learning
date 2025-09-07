@@ -16,12 +16,13 @@ def home_page():
 @app.route("/count")
 def count_page():
 #SET command: store a string value under 'foo'
-     r.set("visit_count")
-     r.incr("vist_count")
+  #   r.set("visit_count")
+     r.incr("visit_count")
 #GET command: retrieve the value stored at 'foo'
-     value = r.get("visit_count")
-     return f"This is the value: {value.decode()}"
-
+   #  r.get("visit_count")
+   #  return f"This is the value: {value.decode()}"
+     count = r.get("visit_count")
+     return f"This is the visit count: {visiters.decode()}"
 if __name__ == "__main__": 
     app.run(host="0.0.0.0", port=5000)
 
