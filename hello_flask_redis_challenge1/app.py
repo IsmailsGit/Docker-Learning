@@ -1,5 +1,6 @@
-import redis
 from flask import Flask
+import redis
+
 app = Flask(__name__)
 
 r = redis.Redis( #Instantiate a Redis client, connecting to local host on port 6379
